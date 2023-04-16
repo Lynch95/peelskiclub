@@ -1,47 +1,38 @@
-
-  const carouselContainer = document.querySelector('.carousel-container');
-  const carouselSlides = document.querySelectorAll('.carousel-slide');
-  const slideWidth = carouselSlides[0].clientWidth;
-  let currentSlide = 0;
+document.addEventListener('DOMContentLoaded', function() {
+    const carouselArrowLeft = document.querySelector('.carousel-arrow-left');
+    const carouselArrowRight = document.querySelector('.carousel-arrow-right');
+    const carouselSlides = document.querySelectorAll('.carousel-slide');
+    let currentSlideIndex = 0;
   
-  function autoSlide() {
-      currentSlide = (currentSlide + 1) % carouselSlides.length;
-      carouselContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-  }
+    function updateSlides() {
+      carouselSlides.forEach((slide, index) => {
+        if (index === currentSlideIndex) {
+          slide.style.display = 'block';
+        } else {
+          slide.style.display = 'none';
+        }
+      });
+    }
   
-  const interval = setInterval(autoSlide, 3000);
+    function prevSlide() {
+      currentSlideIndex--;
+      if (currentSlideIndex < 0) {
+        currentSlideIndex = carouselSlides.length - 1;
+      }
+      updateSlides();
+    }
   
-  carouselContainer.addEventListener('mouseenter', () => {
-      clearInterval(interval);
+    function nextSlide() {
+      currentSlideIndex++;
+      if (currentSlideIndex >= carouselSlides.length) {
+        currentSlideIndex = 0;
+      }
+      updateSlides();
+    }
+  
+    carouselArrowLeft.addEventListener('click', prevSlide);
+    carouselArrowRight.addEventListener('click', nextSlide);
+  
+    updateSlides();
   });
   
-  carouselContainer.addEventListener('mouseleave', () => {
-      setInterval(autoSlide, 3000);
-  });
-
-  function slideTo(index) {
-    currentSlide = index;
-    carouselContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-}
-
-function slideLeft() {
-    if (currentSlide === 0) {
-        slideTo(carouselSlides.length - 1);
-    } else {
-        slideTo(currentSlide - 1);
-    }
-}
-
-function slideRight() {
-    if (currentSlide === carouselSlides.length - 1) {
-        slideTo(0);
-    } else {
-        slideTo(currentSlide + 1);
-    }
-}
-
-const arrowLeft = document.querySelector('.carousel-arrow-left');
-const arrowRight = document.querySelector('.carousel-arrow-right');
-
-arrowLeft.addEventListener('click', slideLeft);
-arrowRight.addEventListener('click', slideRight);
