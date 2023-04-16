@@ -18,3 +18,30 @@
   carouselContainer.addEventListener('mouseleave', () => {
       setInterval(autoSlide, 3000);
   });
+
+  function slideTo(index) {
+    currentSlide = index;
+    carouselContainer.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+}
+
+function slideLeft() {
+    if (currentSlide === 0) {
+        slideTo(carouselSlides.length - 1);
+    } else {
+        slideTo(currentSlide - 1);
+    }
+}
+
+function slideRight() {
+    if (currentSlide === carouselSlides.length - 1) {
+        slideTo(0);
+    } else {
+        slideTo(currentSlide + 1);
+    }
+}
+
+const arrowLeft = document.querySelector('.carousel-arrow-left');
+const arrowRight = document.querySelector('.carousel-arrow-right');
+
+arrowLeft.addEventListener('click', slideLeft);
+arrowRight.addEventListener('click', slideRight);

@@ -248,6 +248,31 @@ div iframe {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-arrow-left {
+  left: 10px;
+}
+
+.carousel-arrow-right {
+  right: 10px;
+}
 /* /////////////////////////////////////////////////// */
 .googlemaps {
   padding: 200px;
